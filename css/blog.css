@@ -1,0 +1,47 @@
+.blog_container {
+        margin-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+}
+.blog_header {
+        background: var(--light-blue-light);
+        border-top-style: solid;
+        border-top-width: 3px;
+        border-color: var(--light-blue-dark);
+}
+.blog_body {
+        padding: 8px;
+}
+
+.author_name {
+        font-size: 14px;
+        padding: 0 10px 5px 10px;
+        margin: auto 0 auto 0;
+}
+
+.post_date {
+        padding: 0 10px 5px 10px;
+        margin: auto 0 auto 0;
+}
+
+.blog_container h2{
+        font-size: 23px;
+        margin: 5px auto 15px 0;
+        padding-left: 10px;
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 500;
+}
+
+.modify_post {
+        height: 35px;
+        width: 35px;
+        border: none;
+        background: none;
+        padding: 2px 10px 2px 10px;
+        margin: 5px 0px 5px 5px;
+}
+
+.modify_post:hover {
+        filter: brightness(130%);
+}

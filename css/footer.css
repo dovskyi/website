@@ -1,0 +1,18 @@
+footer {
+        margin-top: auto;
+        height: 100px;
+        background: var(--gray);
+}
+
+.l_bold {
+        font-size: 12px;
+        margin-right: auto;
+        margin-top: 20px;
+}
+
+.l_text {
+        width: 80%;
+        font-size: 12px;
+        margin-left: auto;
+        margin-top: 20px;
+}

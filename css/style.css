@@ -1,0 +1,235 @@
+:root {
+        --blue: #0046B2 ;
+        --blue-light: #74a4ed;
+        --blue-dark: #003584;
+        --text-dark: #222823;
+        --gray: #EEE;
+        --gray-dark: #C9C9C9;
+        --gray-darker: #6B6B6B;
+        --gray-light: #f9f9f9;
+        --green: #D6FCDA;
+        --green-dark: #C0E8C4; 
+        --red: #FCDEDE;
+        --red-dark: #db8c8c;
+        --light-blue-dark: #90ceed;
+        --light-blue: #b6e3f9;
+        --light-blue-light: #d9edf7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+        position: relative;
+        font-family: "Open Sans", sans-serif;
+        font-size: 15px;
+        color: var(--text-dark);
+        margin: 0;
+        height:100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+}
+
+/*CONTAINERS*/
+.container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1200px;
+        width: 100%;
+        align-items: left;
+        height: auto;
+}
+
+.row {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        max-width: 1200px;
+        height: auto;
+        margin: 0;
+}
+
+.well {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: var(--gray-light);
+        box-shadow: inset 12px 12px 5px -12px var(--gray-dark);
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: var(--gray-dark);
+        padding: 5px;
+}
+
+/*BODY*/
+p {
+        margin-top: 8px;
+}
+
+.p_defined {
+        margin: 4px;
+}
+
+.text1 {
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 500;
+        font-size: 35px;
+        padding-left: 20px;
+        padding-top: 50px;
+}
+
+.text2 {
+        margin: 0px;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        padding: 0px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+        flex-direction: row;
+        border-bottom-style: solid;
+        border-bottom-color: var(--gray);
+        border-bottom-width: 3px;
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 500;
+        font-size: 25px;
+}
+
+.text3 {
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        padding-left: 25px;
+        padding-bottom: 40px;
+}
+
+.text4 {
+        padding-left: 8px;
+        margin: 0;
+        font-size: 12px;
+        color: var(--gray-darker);
+}
+
+.greet_text {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 500;
+        font-size: 30px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--gray);
+        border-bottom-width: 3px;
+        padding: 0px;
+        padding-bottom: 5px;
+}
+
+.welcomebox {
+        margin-top: 32px;
+        display: flex;
+        flex: 1;
+        height: 200px;
+        background: var(--gray);
+        align-items: center;
+        box-shadow: 0 4px 8px var(--gray-dark);
+}
+
+.welcomebox img {
+        margin-right: auto;
+        width: 60%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0 70%;
+}
+
+.textcontainer {
+        width: 45%;
+}
+
+.infobox {
+        margin-top: 20px;
+        display: flex;
+        flex: 1;
+        border-style: solid;
+        border-radius: 4px;
+        height: 26px;
+}
+
+.info-box-green {
+        border-color: var(--green-dark);
+        background: var(--green);
+}
+.info-box-blue{
+        border-color: var(--light-blue);
+        background: var(--light-blue-light);
+        border-radius: 0;
+        padding: 0;
+}       
+
+.info-box-blue p {
+        color: var(--blue);
+}
+
+.col1, .col2 {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+
+}
+.col1 {
+        padding-right: 32px;
+        flex: 60%;
+}
+.col2 {
+        flex: 40%;
+}
+/* Login stuffs */
+.button_user {
+        background: var(--gray);
+        font-size: 13px;
+        width: fit-content;
+        height: fit-content;
+        padding: 0px;
+        margin-top: auto;
+        margin-bottom: auto;
+}
+
+.button_user p{
+        padding: 6px;
+        margin: 0px;
+}
+
+.button_user a{
+        margin: 0px;
+        padding: 0px;
+        text-decoration:none;
+}
+
+.button_user:hover{
+        cursor: pointer;
+}
+
+.confectioner {
+        object-fit: cover;
+        margin-right: auto;
+        max-width: 50%;
+}
+
+.psswd_toggle {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+        background: var(--gray);
+        padding: 4px;
+}
+
+.error_text {
+        font-size: 14px;
+        color: var(--red-dark);
+}

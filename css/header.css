@@ -1,0 +1,154 @@
+.navbar-left, .navbar-right {
+        padding-left: 16px;
+        margin: 0px;
+        display: flex;
+        list-style: none;
+        height: auto;
+}
+
+.navbar-right {
+        margin-left: auto;
+}
+
+.nav-itm {
+        text-align: center;
+        font-size: 16px;
+        color: #ffffff;
+        height: auto;
+}
+
+.nav-itm a {
+        padding: 8px;
+        display: block;
+}
+
+.nav-itm:hover {
+        background: var(--blue-dark);
+        color: #fff
+}
+
+.title {
+        background-image: linear-gradient(to left, var(--blue-light), #fff);
+        height: 100px;
+}
+#logoimg {
+        margin-right: auto;
+        max-height: 100px;
+}
+.navbar   {
+        background: var(--blue);
+}
+
+.library {
+        background: var(--gray);
+}
+
+.library-left {
+        padding: 0px;
+        display: flex;
+        margin: 2px;
+        list-style: none;
+        height: auto;
+        align-items: center;
+
+}
+.lib-itm{
+        text-align: center;
+        font-size: 16px;
+        height: auto;
+}
+.lib-itm a{
+        display: block;
+        padding: 8px;
+        margin: 0px;
+}
+
+.lib-itm:hover {
+        background: #fff;
+        outline-style: outset;
+        outline-color: var(--gray);
+}
+
+.search {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        max-width: 300px;
+}
+
+.search button, .search input{
+        box-sizing: border-box;
+        height: 32px;
+        align-items: center;
+        display: flex;
+        padding: 6px;
+        background: #fff;
+        border-style: solid;
+        border-color: var(--gray-dark);
+}
+.search button {
+        border-left: none;
+        cursor: pointer;
+}
+
+.title button {
+        cursor: pointer;
+        background: var(--blue);
+        margin-left: auto;
+        color: #fff;
+        width: 100px;
+        height: 40px;
+        align-items: center;
+        border: none;
+}
+
+header a:link, a:visited {
+        color: inherit;
+        text-decoration: none;
+}
+
+#userbtn {
+        position: relative;
+}
+
+.dropbtn {
+        padding: 8px;
+        display: flex;
+        flex: 1;
+        background: none;
+        color: inherit;
+        font-size: inherit;
+        border: none;
+        height: 100%;
+}
+
+.dropdown-content {
+        display: none;
+        position: absolute;
+        align-items: left;
+        right: 0;
+        left: auto;
+        min-width: 150px;
+        z-index: 1;
+        background: #fff;
+        border: solid;
+        box-shadow: 0 4px 8px var(--gray-dark);
+}
+.dropdown-content button{
+        font-size: 16px;
+        flex: 1;
+        background: none;
+        width: 100%;
+        color: var(--text-dark);
+	text-align: left;
+        border: none;
+}
+
+.dropdown-content a:link {
+        color: var(--text-dark);
+}
+
+.dropdown-content a:hover {
+        background: var(--blue);
+        color: #fff;
+}
