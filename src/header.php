@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/style.css?v=0.30">
+<link rel="stylesheet" href="/css/style.css?v=0.34">
 <link rel="stylesheet" href="/css/header.css?v=0.16">
 <link rel="icon" type="image/x-icon" href="/misc/static/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
                                         <button class="dropbtn" id="user-dropbtn" onclick="dropdown('user-dropdown', 'drop_arrow', 'user-dropbtn')">
 <?php
 if (empty($_SESSION["usrname"])){
-        echo "User";
+        echo "Guest";
 }
 else {
         echo $_SESSION["usrname"];
