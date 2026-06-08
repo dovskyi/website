@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $filter_usrn = "/^[A-Za-z0-9_\.]+$/";
         $filter_psswd= "/^[A-Za-z0-9_\.\$#!%&?]+$/";
 
-        $username = $_POST["usrname"] ?? '';
-        $password = $_POST["usr_psswd"] ?? '';
+        $username = strtolower(trim($_POST["usrname"] ?? ''));
+        $password = trim($_POST["usr_psswd"] ?? '');
 
         $usr_length = strlen($username);
         $psswd_length = strlen($password);
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         
                         if (password_verify($password . $row["salt"], $row["password"])){
                                 $_SESSION["usrname"] = $username;
+                                $_SESSION["role"] = $row["role"];
                                 header("Location: /index.php");
                                 exit();
                         }

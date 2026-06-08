@@ -6,9 +6,7 @@ $data = json_decode($payload, true);
 
 $blog_id = (int)$data["blog_id"];
 $username = !empty($_SESSION["usrname"])? $_SESSION["usrname"]: '';
-
-$valid = false;
-$role = NULL;
+$error = 'true';
 
 if (!empty($username)){
         $stmt = $db->prepare("SELECT * FROM users
@@ -30,15 +28,21 @@ if (!empty($username)){
         if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($username === $row["username"] || $role === 'root'){
-                        $valid = true;
+                        $stmt = $db->prepare("DELETE FROM blogs
+                                              WHERE blog_id = :blog_id;");
+                        $stmt->bindParam(':blog_id', $blog_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $error = NULL;
+                }
+                else {
+                        $error = "Could not verify user";
                 }
         }
 }
 
-$response = ["valid" => $valid,
-        "username" => $username,
-        "role" => $role
-];
+
+$response = [
+        "error" => $error];
 
 header('Content-Type: application/json');
 echo json_encode($response);
