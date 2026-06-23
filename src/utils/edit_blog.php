@@ -65,7 +65,7 @@ if (!empty($username)){
 
 $response = [
         "error" => $error,
-        "content" => $Parsedown->text($content),
+        "content" => $Parsedown->text(htmlspecialchars($content)),
         "moddate" => date("Y-m-d H:i:s")];
 
 header('Content-Type: application/json');

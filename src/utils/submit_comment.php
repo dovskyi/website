@@ -12,18 +12,16 @@ $Parsedown = new ParsedownMath([
 $payload = file_get_contents('php://input');
 $data = json_decode($payload, true);
 
-$title = trim($data["title"]);
 $content = trim($data["content"]);
+$blog_id = $data["blog_id"];
 
-$title_length = strlen($title);
 $content_length = strlen($content);
 
 $username = !empty($_SESSION["usrname"]) ? $_SESSION["usrname"]: "anonym";
 $user_role = NULL;
-$blog_id = NULL;
 
-if ($title_length <= 0 || $titile_length > 200 || $content_length <= 0 || $content_length > 4000) {
-        $error = "Title can't be more than 200 chars.<br>Content can't be more than 4000 chars.";
+if ($content_length <= 0 || $content_length > 1000) {
+        $error = "Content can't be more than 1000 chars.";
 }
 else {
         $stmt = $db->prepare("SELECT * FROM users
@@ -37,16 +35,16 @@ else {
                 $user_id = $row["user_id"];
                 $user_role = $row["role"];
 
-                $stmt = $db->prepare("INSERT INTO blogs (user_id, title, content, post_date)
-                                      VALUES (:user_id, :title, :content, :post_date);");
+                $stmt = $db->prepare("INSERT INTO comments (blog_id, user_id, content, post_date)
+                                      VALUES (:blog_id, :user_id, :content, :post_date);");
 
+                $stmt->bindParam(":blog_id", $blog_id);
                 $stmt->bindParam(":user_id", $user_id);
-                $stmt->bindParam(":title", $title);
                 $stmt->bindParam(":content", $content);
                 $stmt->bindParam(":post_date", date("Y-m-d H:i:s"));
 
                 $stmt->execute();
-                $blog_id = $db->lastInsertId();
+                $comment_id = $db->lastInsertId();
         }
         else {
                 $error = "Could not find associated account";
@@ -57,9 +55,9 @@ else {
 
 $response = [
         "error" => $error,
-        "content" => $Parsedown->text(htmlspecialchars($content)),
-        "blog_id" => $blog_id,
-        "author" => $username,
+        "content" => htmlspecialchars($content),
+        "comment_id" => $comment_id,
+        "username" => $username,
         "role" => $user_role,
         "post_date" => date("Y-m-d H:i:s")];
 

@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="col2">
                         <div class="container">
                         <form action="/src/utils/change_psswd.php" method="post">
-                        <h2 class="text2"><?php
+                        <h2 class="section_header"><?php
                                 echo "Password change: " . $_SESSION["usrname"];
                                 ?> 
                                 </h2>

@@ -53,6 +53,133 @@ async function edit_post(button){
         }
 }
 
+function delete_comment(button){
+        const container = button.closest(".blog_comments");
+        const comment_container = button.closest(".comment_container");
+        const error = container.querySelector(".error_div");
+
+        const comment_id = button.dataset.comment_id;
+
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+
+        const data = {
+                comment_id: comment_id
+                };
+
+        xhr.open('POST', '/src/utils/delete_comment.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+                if (xhr.readyState == xhr.DONE){
+                        if (xhr.status === 200) {
+                                const response = JSON.parse(xhr.responseText);
+
+                                if (response.error) {
+                                        error.style.display = 'flex';
+                                        error.innerHTML = response.error;
+                                        return;
+                                }
+                                error.style.display = 'none';
+                                comment_container.remove();
+                                return;
+                        }
+                        else {
+                                error.style.display = 'flex';
+                                error.innerHTML = "Server error";
+                                return;
+                        }
+                }
+        };
+        xhr.send(JSON.stringify(data));
+}
+
+function load_comments(button) {
+        //Originally everything was supposed to be loaded dynamically,
+        //but that would not make sense with my current architecture. This is more efficient.
+        const container = button.closest(".blog_comments");
+
+        const comment_section = container.querySelector(".comment_section_wrapper");
+        const error = container.querySelector(".error_div");
+        const rest = container.querySelector(".comments_rest");
+
+        error.style.display = 'none';
+        button.style.display = 'none';
+        rest.style.display = '';
+
+        return;
+}
+
+function submit_comment(button) {
+        const container = button.closest(".blog_comments");
+
+        const comment_section = container.querySelector(".comment_section_wrapper");
+        const input = container.querySelector(".comment_text");
+        const error = container.querySelector(".error_div");
+
+        const content = input.value;
+        const blog_id = button.dataset.blog_id;
+
+        if (content.length <= 0 || content.length > 1000){
+                error.style.display = 'flex';
+                error.innerHTML = "Content can't be more than 1000 chars.";
+                return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+
+        const data = {
+                content: content,
+                blog_id: blog_id
+                };
+
+        xhr.open('POST', '/src/utils/submit_comment.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+                if (xhr.readyState == xhr.DONE){
+                        if (xhr.status === 200) {
+                                const response = JSON.parse(xhr.responseText);
+
+                                if (response.error) {
+                                        error.style.display = 'flex';
+                                        error.innerHTML = response.error;
+                                        return;
+                                }
+                                error.style.display = 'none';
+                                input.value = '';
+                                if (response.role != 'guest'){
+                                        delete_button = `<button class="delete_comm" data-comment_id="${response.comment_id}" onclick="if(confirm(\'Are you sure you want to delete this comment?\')) delete_comment(this);" style="background-image: url('/misc/icons/trash.png?v=0');"></button>`;
+                                } else {
+                                        delete_button = '';
+                                }
+                                new_comment = `
+                                <div class="comment_container temp_container">
+                                <div class="row">
+                                                <div class="comment_c1"><span><b>${response.role}::${response.username}</b></span>
+                                                <div class="row">
+                                                        <span>${response.post_date}</span>${delete_button}
+                                                </div>
+                                                </div>
+                                                <div class="comment_c2">${response.content}</div>
+                                </div>
+                                </div>
+                                `;
+
+                                comment_section.insertAdjacentHTML("beforeend", new_comment);
+                                return;
+                        }
+                        else {
+                                error.style.display = 'flex';
+                                error.innerHTML = "Server error";
+                                return;
+                        }
+                }
+        };
+        xhr.send(JSON.stringify(data));
+}
+
 function edit_blog_submit(button) {
         const container = button.closest(".blog_js_wrapper");
 
@@ -199,7 +326,6 @@ function delete_post(button){
         xhr.send(JSON.stringify(data));
 }
 
-
 function toggle_blog(button){
         const container = button.closest(".blog_js_wrapper");
 
@@ -229,6 +355,52 @@ function toggle_blog(button){
                 container.style.margin = '';
                 button.style.backgroundImage = 'url(\'/misc/icons/collapse.png\')';
         }
+}
+
+function toggle_comments(button){
+        const container = button.closest(".blog_comments");
+
+        const comment_body = container.querySelector(".comment_body");
+        const comment_error = container.querySelector(".error_div");
+
+        comment_error.style.display = 'none';
+
+        if (comment_body.style.display != 'none'){
+                comment_body.style.display = 'none';
+                button.style.backgroundImage = 'url(\'/misc/icons/expand.png\')';
+        }
+        else {
+                comment_body.style.display = '';
+                button.style.backgroundImage = 'url(\'/misc/icons/collapse.png\')';
+        }
+}
+
+function verify_user(id){
+        return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.responseType = "text";
+                const data = {blog_id: id}
+
+                xhr.open('POST', '/src/utils/verify_user.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function(){
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                        const response = JSON.parse(xhr.responseText);
+                                        if (response.valid){
+                                                resolve(1);
+                                        }
+                                        else {
+                                                resolve(0);
+                                        }
+                                }
+                                else {
+                                        resolve(0);
+                                }
+                        }
+                };
+                xhr.send(JSON.stringify(data));
+        });
 }
 
 document.getElementById('blog_submit').addEventListener('submit', function(event){
@@ -267,6 +439,14 @@ document.getElementById('blog_submit').addEventListener('submit', function(event
                                 return;
                         }
                         document.getElementById('blog_submit_error').style.display = "none";
+                        let edit_buttons = '';
+                        if (response.role !== 'guest') {
+                                edit_buttons =
+                                        `<div class="modify_button_wrapper">
+                                                                <button class="modify_post" type="button" onclick="if(confirm('Are you sure you want to delete this blog?')) delete_post(this);" data-blog_id="${response.blog_id}" style="background-image: url('/misc/icons/trashbin.ico');background-position: center;background-repeat: no-repeat;background-size: cover;"></button>
+                                                                 <button class="modify_post" type="button" onclick="edit_post(this)" data-blog_id="${response.blog_id}" style="background-image: url('/misc/icons/edit.png?v=1');background-position: center;background-repeat: no-repeat;background-size: cover;"></button>
+                                                        </div>`;
+                        }
 
                         var new_blog = `
                          <div class="blog_js_wrapper">
@@ -281,11 +461,7 @@ document.getElementById('blog_submit').addEventListener('submit', function(event
                                                         <span class="author_name"><b>${String(response.role).charAt(0).toUpperCase() + String(response.role).slice(1)}::${response.author}</b></span>
                                                         <span class="post_date">Posted: ${response.post_date}</span>
                                                         <span class="modify_date"></span>
-                                                        <div style="margin: 0 0 0 auto;">
-                                                        <div class="modify_button_wrapper">
-                                                                <button class="modify_post" type="button" onclick="if(confirm('Are you sure you want to delete this blog?')) delete_post(this);" data-blog_id="${response.blog_id}" style="background-image: url('/misc/icons/trashbin.ico');background-position: center;background-repeat: no-repeat;background-size: cover;"></button>
-                                                                 <button class="modify_post" type="button" onclick="edit_post(this)" data-blog_id="${response.blog_id}" style="background-image: url('/misc/icons/edit.png?v=1');background-position: center;background-repeat: no-repeat;background-size: cover;"></button>
-                                                        </div>
+                                                        <div style="margin: 0 0 0 auto;">`+edit_buttons+`
                                                         </div>
                                                 </div>
                                         </div>

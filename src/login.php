@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="col2">
                         <div class="container">
                         <form action="/src/login.php" method="post">
-                                <h2 class="text2">Log in</h2>
+                                <h2 class="section_header">Log in</h2>
                                 <label><p class="p_defined"><b>Username:</b></p></label>
                                 <input id="input_usrname" class="well" type="text" name="usrname" minlength="3" maxlength="20" required>
                                 <label><p class="p_defined"><b>Password:</b></p></label>

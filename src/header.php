@@ -1,12 +1,15 @@
-<link rel="stylesheet" href="/css/style.css?v=0.34">
+<link rel="stylesheet" href="/css/style.css?v=1.04">
 <link rel="stylesheet" href="/css/header.css?v=0.16">
-<link rel="icon" type="image/x-icon" href="/misc/static/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.png?v=0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jim+Nightshade&display=swap" rel="stylesheet">
 
 <header>
         <div class="title">
@@ -21,7 +24,6 @@
                         <div class="row">
                         <ul class="navbar-left">
                                 <li class="nav-itm"><a href="/">Main</a></li>
-                                <li class="nav-itm"><a href="/src/highlights.php">Highlights</a></li>
                                 <li class="nav-itm"><a href="/src/server.php">Server</a></li>
                                 <li class="nav-itm"><a href="/src/blog.php">Blog</a></li>
                                 <li class="nav-itm"><a href="/src/aboutme.php">About me</a></li>
