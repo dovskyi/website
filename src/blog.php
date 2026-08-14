@@ -22,27 +22,6 @@ $conditions = [];
 $error = '';
 
 
-$stmt = $db->prepare("SELECT COUNT(*) FROM blogs;");
-$stmt->execute();
-
-$itemmax = $stmt->fetchColumn();
-$itemmax = ceil($itemmax/$perpage);
-
-if ($page > $itemmax || $page < 0){
-        $page = 0;
-}
-
-if (isset($_GET["to_right"]) && isset($_GET["to_left"])){
-        $page = $page;
-}
-else if (isset($_GET["to_right"]) && $page < $itemmax){
-        $page +=1;
-}
-else if (isset($_GET["to_left"]) && $page > 1){
-        $page -=1;
-}
-
-$offset = $perpage * ($page-1);
 
 if (isset($_GET["clear_filter"])){
         $order = "DESC";
@@ -54,7 +33,7 @@ else {
         if ($order !== "ASC") {
                 $order = "DESC";
         }
-        if (preg_match($date_reg, $lower_bound) && $lower_bound > '2026-0-0' && $lower_bound <= $upper_bound){
+        if (preg_match($date_reg, $lower_bound) && $lower_bound > '2026-0-0' && ($lower_bound <= $upper_bound || $upper_bound === '')){
                 $conditions[] = "post_date >= :lower_bound";
                 $bind[':lower_bound'] = $lower_bound;
         }
@@ -78,6 +57,28 @@ else {
         }
 }
 
+$query = "SELECT COUNT(*) FROM blogs" . $wheres . ";";
+$stmt = $db->prepare($query);
+$stmt->execute($bind);
+
+$itemmax = $stmt->fetchColumn();
+$itemmax = ceil($itemmax/$perpage);
+
+if ($page > $itemmax || $page < 0){
+        $page = 1;
+}
+
+if (isset($_GET["to_right"]) && isset($_GET["to_left"])){
+        $page = $page;
+}
+else if (isset($_GET["to_right"]) && $page < $itemmax){
+        $page +=1;
+}
+else if (isset($_GET["to_left"]) && $page > 1){
+        $page -=1;
+}
+
+$offset = $perpage * ($page-1);
 
 $query = "SELECT blogs.*, users.username, users.role 
         FROM blogs
@@ -108,13 +109,12 @@ if (!empty($blog_array)){
                 }
         }
         $blog_list = $blog_list . $blog_array[$itms]["blog_id"];
-}
 
 $query = "WITH tmp AS (
-	        SELECT comments.*, users.username, users.role
-                FROM comments 
-                INNER JOIN users ON comments.user_id = users.user_id
-	        WHERE blog_id IN ( " . $blog_list . ") 
+        SELECT comments.*, users.username, users.role
+        FROM comments 
+        INNER JOIN users ON comments.user_id = users.user_id
+        WHERE blog_id IN ( " . $blog_list . ") 
         )  
         SELECT comm_id, blog_id, content, post_date, username, role
         FROM tmp
@@ -124,6 +124,7 @@ $stmt = $db->prepare($query);
 $stmt->execute();
 
 $blog_comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
 <html>
@@ -132,7 +133,7 @@ $blog_comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </head>
         <body>
                 <?php include $_SERVER['DOCUMENT_ROOT'].'/src/header.php'; ?>
-                <link rel="stylesheet" href="/css/blog.css?v=2.05">
+                <link rel="stylesheet" href="/css/blog.css?v=2.07">
                 <div class="container">
                         <div class="page_header blog_page_header">
                                 <div class="row">
@@ -158,15 +159,15 @@ $blog_comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 <div class="error_text" style="margin: auto 0 10px 15px;"><?php echo $error; $error = ''; ?></div>
                                                 <div class="row">
                                                 <span style="font-family:'Bitter', 'Open Sans'; margin: 0 10px 0 13px;"><b>Order by: </b></span>
-                                                <select id="sort_filter" name="sort" selected="ASC">
+                                                <select class="sort_filter" name="sort" selected="ASC">
                                                         <option <?php echo ($order==='DESC') ? "selected":''?>>DESC</option>
                                                         <option <?php echo ($order==='ASC') ? "selected":''?>>ASC</option>
                                                 </select>
                                                 <span>from:</span>
-                                                <input type="date" class="date" name="date_from" min="2026-0-0" value='<?php if(!empty($lower_bound)){ echo $lower_bound;}?>'></input>
+                                                <input type="date" class="date_filter" name="date_from" min="2026-0-0" value='<?php if(!empty($lower_bound)){ echo $lower_bound;}?>'></input>
                                                 <span>to:</span>
-                                                <input type="date" class="date" name="date_to" value='<?php if(!empty($upper_bound)){ echo $upper_bound;}?>'></input>
-                                                <button class="filter_button" name="set_filter"><b>Go</b></button>
+                                                <input type="date" class="date_filter" name="date_to" value='<?php if(!empty($upper_bound)){ echo $upper_bound;}?>'></input>
+                                                <button class="filter_button" name="set_filter" style="margin-left: 10px"><b>Go</b></button>
                                                 <button class="filter_button" name="clear_filter"><b>Clear</b></button>
                                                 <button class="filter_button" name="goto_p1" style="margin-left: auto;"><b>GOTO page 1</b></button>
                                                 </div>
@@ -190,14 +191,14 @@ $blog_comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <textarea id="my-text-area"></textarea>
                         </form>
-                        <script> const easyMDE = new EasyMDE({
-                        element: document.getElementById('my-text-area'),
-                        spellChecker: false,
-                        minHeight: "70px",
-                        placeholder: 'Ctrl+P for preview.\n(Math can\'t be previewed without reloading the page).'
-                        }); 
-                        </script>   
-                        <script src="/js/blog_functions.js?v=0.64"></script>
+<script> const easyMDE = new EasyMDE({
+element: document.getElementById('my-text-area'),
+        spellChecker: false,
+        minHeight: "70px",
+        placeholder: 'Ctrl+P for preview.\n(Math can\'t be previewed without reloading the page).'
+}); 
+</script>   
+                        <script src="/js/blog_functions.js?v=0.66"></script>
                         <div id="blog_field_container">
                         <?php foreach($blog_array as $blog){ ?>
                                 <div class="blog_js_wrapper">
@@ -260,7 +261,7 @@ foreach($current_comments as $comment) {
                                                                                 <div class="comment_c2">' . $comment["content"] . '</div>
                                                                         </div>
                                                                 </div>';
-               $i++; 
+                $i++; 
         } else {
                 if ($i === 2) {echo "<div class='comments_rest' style='display: none;'>";}
                 $i++;
@@ -303,7 +304,7 @@ if (count($current_comments) > 2){
                                                                 </div>
                                                         </form>
                                                 </div>
-                                                
+
                                         </div>
                                 </div>
                                 </div>

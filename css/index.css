@@ -1,0 +1,45 @@
+.well_container {
+       width: 100%;
+       margin-bottom: 10px;
+}
+
+.well_container p {
+        margin: 2px 0 2px 2px;
+}
+
+.well_header {
+        width: 100%;
+        padding: 5px;
+        background: var(--gray);
+        overflow-wrap: anywhere;
+}
+
+.well_body img{
+        max-height: 100px;
+        max-width: 100%;
+}
+
+.well_body {
+        padding: 5px;
+        overflow-wrap: anywhere;
+}
+
+.well_body p {
+        margin: 5px 0 5px 5px;
+        overflow-wrap: anywhere;
+}
+
+.well_name {
+        font-family: "Bitter", "Open Sans", sans-serif;
+        font-weight: 600;
+        font-size: 17px;
+        overflow-wrap: anywhere;
+}
+
+.well_body :is(h1, h2, h3, h4, h5, h6) {
+        margin: 10px;
+}
+
+.well_info {
+        font-weight: 200;
+}

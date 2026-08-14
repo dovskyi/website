@@ -1,0 +1,80 @@
+/* Reassign header stuff */
+body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+}
+
+#logoimg {
+        background: radial-gradient(50% 50% at center, white, transparent);
+}
+
+.title, .navbar {
+        background: transparent;
+}
+
+.library {
+        background: linear-gradient(to right, transparent 0%, var(--gray-light) 20%, var(--gray-light) 80%, transparent 100%);
+}
+
+.silver_aero {
+        background-image:
+        linear-gradient(to right, transparent 60%, var(--gray-light) 70%, transparent 80%),
+        linear-gradient(to bottom, var(--gray-light) 40%, var(--gray-dark) 60%, var(--gray) 95%);
+        text-shadow: 2px 2px 3px white, 1px 1px 0 white;
+        border: 2px solid white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px 2px var(--gray-dark);
+}
+
+.aero_glass {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        border: 2px solid white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px 2px var(--gray-dark);
+}
+
+.silver_aero_item {
+        background: linear-gradient(to bottom, var(--gray) 40%, var(--gray-dark) 60%, var(--gray) 95%);
+        cursor: pointer;
+        border-radius: 5px;
+        text-shadow: 2px 2px 3px white, 1px 1px 0 white;
+        border: 2px solid white;
+}
+
+
+/* separate effect classes */
+
+.aero_shadow {
+        box-shadow: 0 2px 5px 2px var(--gray-dark);
+}
+
+.aero_text {
+        text-shadow: 2px 2px 3px white, 1px 1px 0 white;
+}
+
+.hoverable_aero:hover, .lock_aero_hover {
+        background:
+        radial-gradient(circle at bottom, #2aceda, transparent 65%),
+        linear-gradient(#b6d9ee 50%, #1a6ca1 50%);
+        box-shadow: 0 0 7px 3px #5dc4f0, inset 0 0 0 1px rgba(255, 255, 255, 0.98);
+        color: white;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+        z-index: 100;
+        cursor: pointer;
+}
+
+.hoverable_aero_red:hover{
+        background:
+        radial-gradient(circle at bottom, #ff8a7a, transparent 65%),
+        linear-gradient(#ffbdb3 50%, #d40000 50%);
+        box-shadow: 0 0 7px 3px #ff5030, inset 0 0 0 1px rgba(255, 255, 255, 0.98);
+        color: white;
+        z-index: 100;
+}
+
+.aero_glass img {
+        border-radius: 5px;
+        box-shadow: 0 0px 4px 1px white;
+}

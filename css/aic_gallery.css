@@ -1,0 +1,13 @@
+.gallery_cont {
+        display: flex;
+}
+
+.gallery_col {
+        flex: 1;
+        flex-direction: row;
+}
+
+.block img {
+        object-fit: contain;
+        width: 100%;
+}

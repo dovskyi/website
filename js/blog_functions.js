@@ -120,7 +120,11 @@ function submit_comment(button) {
         const content = input.value;
         const blog_id = button.dataset.blog_id;
 
-        if (content.length <= 0 || content.length > 1000){
+        if (content.length <= 0){
+                error.style.display = 'none';
+                return;
+        }
+        if (content.length > 1000){
                 error.style.display = 'flex';
                 error.innerHTML = "Content can't be more than 1000 chars.";
                 return;

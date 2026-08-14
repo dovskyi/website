@@ -1,0 +1,214 @@
+:root {
+  /* Dark base tones */
+  --mh-void: #050508;
+  --mh-black: #0a0a0f;
+  --mh-dark-steel: #141418;
+  --mh-gunmetal: #2a2a32;
+  --mh-gunmetal-light: #33333d;
+
+  /* Metallic tones */
+  --mh-bead-blast: #606068;
+  --mh-chrome: #a0a0a8;
+  --mh-chrome-bright: #d0d0d8;
+  --mh-chrome-light: #e0e0e8;
+  --mh-glint: #f0f0f5;
+
+  /* Accent colors */
+  --mh-blue: #0066cc;
+  --mh-blue-light: #0088ff;
+  --mh-green: #00cc44;
+  --mh-green-light: #00ff66;
+  --mh-red: #cc0033;
+  --mh-red-light: #ff1144;
+  --mh-yellow: #ccaa00;
+  --mh-yellow-light: #ffcc11;
+
+  /* Glow / transparency */
+  --mh-glow-blue: rgba(0, 102, 204, 0.3);
+  --mh-glow-green: rgba(0, 204, 68, 0.25);
+  --mh-glow-red: rgba(204, 0, 51, 0.25);
+  --mh-glow-yellow: rgba(204, 170, 0, 0.2);
+  --mh-glass: rgba(160, 160, 168, 0.06);
+  --mh-glass-border: rgba(160, 160, 168, 0.12);
+
+  /* Functional mappings */
+  --mh-bg-primary: var(--mh-void);
+  --mh-bg-secondary: var(--mh-dark-steel);
+  --mh-bg-surface: var(--mh-gunmetal);
+  --mh-text-primary: var(--mh-chrome-light);
+  --mh-text-secondary: var(--mh-chrome);
+  --mh-text-muted: var(--mh-bead-blast);
+  --mh-accent: var(--mh-blue);
+  --mh-border: var(--mh-gunmetal-light);
+}
+
+h1, h2, h3 {
+  font-family: 'Chakra Petch', 'Exo 2', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--mh-chrome-light);
+  text-transform: uppercase;
+}
+
+/* Display / Hero text with metallic gradient */
+.mh-display {
+  font-family: 'Orbitron', 'Audiowide', sans-serif;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  letter-spacing: 0.15em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  background: linear-gradient(
+    180deg,
+    #f0f0f5 0%,
+    #a0a0a8 35%,
+    #606068 50%,
+    #a0a0a8 65%,
+    #d0d0d8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Body text */
+body {
+  font-family: 'Inter', 'IBM Plex Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.65;
+  color: var(--mh-text-secondary);
+}
+
+/* Technical label / UI text */
+.mh-label {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--mh-bead-blast);
+}
+
+/* Decorative code / data overlay text */
+.mh-code {
+  font-family: 'Share Tech Mono', 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--mh-green);
+  opacity: 0.4;
+  line-height: 1.8;
+}
+
+/* Glowing accent text */
+.mh-glow-text {
+  color: var(--mh-blue-light);
+  text-shadow:
+    0 0 8px var(--mh-glow-blue),
+    0 0 30px rgba(0, 102, 204, 0.15);
+}
+
+.mh-chrome-surface {
+  background: linear-gradient(
+    180deg,
+    #d0d0d8 0%,
+    #a0a0a8 20%,
+    #606068 45%,
+    #70707a 55%,
+    #b8b8c0 80%,
+    #e0e0e8 100%
+  );
+  border-radius: 4px;
+}
+
+/* Horizontal chrome band */
+.mh-chrome-band {
+  background: linear-gradient(
+    90deg,
+    #606068 0%,
+    #a0a0a8 15%,
+    #d0d0d8 30%,
+    #e0e0e8 50%,
+    #d0d0d8 70%,
+    #a0a0a8 85%,
+    #606068 100%
+  );
+  height: 3px;
+}
+
+/* Bead-blast matte metal texture */
+.mh-bead-blast {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.02) 2px
+    ),
+    linear-gradient(
+      180deg,
+      #606068 0%,
+      #505058 50%,
+      #5a5a62 100%
+    );
+}
+
+.mh-button {
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  border: 1px solid var(--mh-bead-blast);
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(96, 96, 104, 0.3) 0%,
+    rgba(42, 42, 50, 0.6) 100%
+  );
+  color: var(--mh-chrome);
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.mh-button:hover {
+  border-color: var(--mh-blue);
+  color: var(--mh-chrome-light);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 12px var(--mh-glow-blue),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Sweep highlight on hover */
+.mh-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  transition: left 0.4s ease;
+}
+
+.mh-button:hover::after {
+  left: 100%;
+}
+
+/* Clipped-corner button variant */
+.mh-button--clipped {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  border-radius: 0;
+}
+

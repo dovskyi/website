@@ -39,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         if (password_verify($password . $row["salt"], $row["password"])){
                                 $_SESSION["usrname"] = $username;
                                 $_SESSION["role"] = $row["role"];
+                                if ($row["role"] === 'root') {
+                                        $_SESSION['authenticated'] = true;
+                                }
                                 header("Location: /index.php");
                                 exit();
                         }

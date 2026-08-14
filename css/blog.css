@@ -152,35 +152,6 @@ p, span {
        height: 100%;
 }
 
-.filter_form {
-        margin: auto 0 0 0;
-        align-items: center;
-}
-
-.filter_form span{
-        display: inline-flex;
-        align-items: center;
-}
-
-#sort_filter, .date, .filter_button {
-        margin: 0 10px 0 0px;
-        height: 100%;
-        background: var(--light-blue-light);
-        padding: 3px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--light-blue);
-}
-
-.filter_button {
-        padding-left: 10px;
-        padding-right: 10px;
-}
-
-.filter_button:hover {
-        background: var(--light-blue);
-}
-
 .blog_comments {
         width: 85%;
         margin-left: auto;

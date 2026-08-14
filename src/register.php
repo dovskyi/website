@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $filter_usrn = "/^[A-Za-z0-9_\.]+$/";
         $filter_psswd= "/^[A-Za-z0-9_\.\$#!%&?]+$/";
 
-        $username = strtolower(trim($_POST["usrname"] ?? ''));
+        $username = trim($_POST["usrname"] ?? '');
         $password = trim($_POST["usr_psswd"] ?? '');
 
         $usr_length = strlen($username);

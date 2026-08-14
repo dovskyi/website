@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/footer.css">
 <div class="pre-footer" style="height: 50px;"></div>
-<footer>
+<footer id="page_footer">
         <div class="container">
                 <div class="row">
                         <b class="l_bold">LICENSE:</b> 
@@ -8,7 +8,7 @@
                 </div>
                 <div class="row">
                         <b class="l_bold">Contact:</b> 
-                        <p class="l_text">mykyta.dombr@gmail.com | telegraph | other means of communication</p>
+                        <p class="l_text">mykyta.dombr@gmail.com</p>
                 </div>
         </div>
 </footer>

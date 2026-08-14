@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/style.css?v=1.04">
-<link rel="stylesheet" href="/css/header.css?v=0.16">
+<link rel="stylesheet" href="/css/style.css?v=1.30">
+<link rel="stylesheet" href="/css/header.css?v=0.17">
 <link rel="icon" type="image/x-icon" href="/favicon.png?v=0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,22 +11,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jim+Nightshade&display=swap" rel="stylesheet">
 
-<header>
-        <div class="title">
+<header id="page_header">
+        <div class="title" id="title_header">
                 <div class="container">
-                        <div class="row">
-                                <a href="/"><img id="logoimg" src="/misc/static/logo.png"></a>
-                        </div>
+                        <a href="/"><img id="logoimg" src="/misc/static/logo.png?v=0"></a>
                 </div>
         </div>
+        <div id="navbar_tools">
         <nav class="navbar">
                 <div class="container">
                         <div class="row">
                         <ul class="navbar-left">
                                 <li class="nav-itm"><a href="/">Main</a></li>
-                                <li class="nav-itm"><a href="/src/server.php">Server</a></li>
+                                <!-- <li class="nav-itm"><a href="/src/server.php">Server</a></li> -->
                                 <li class="nav-itm"><a href="/src/blog.php">Blog</a></li>
                                 <li class="nav-itm"><a href="/src/aboutme.php">About me</a></li>
+                                <?php if ($_SESSION["role"] === "root") { echo '<li class="nav-itm"><a href="/elFinder/elfinder.php">MGR</a></li>';}?>
                         </ul>
                         <ul class="navbar-right">
                                <!-- <li class="nav-itm"><a>Tools</a></li>-->
@@ -60,22 +60,19 @@ else {
                         </div>
                 </div>
         </nav>
-        <nav class="library">
+        <nav id="library_tools" class="library">
                 <div class="container">
                         <div class="row">
                         <ul class="library-left">
-                                <li class="lib-itm"><a href="/src/oilpainting.php">Oil Painting</a></li>
-                                <li class="lib-itm"><a href="/src/ink.php">Ink/Charcoal</a></li>
-                                <li class="lib-itm"><a href="/src/programming.php">Programming</a></li>
-                                <li class="lib-itm"><a href="/src/circuits.php">Circuits</a></li>
+                                <li class="lib-itm"><a href="/src/gallery.php">Gallery</a></li>
+                                <li class="lib-itm"><a href="/src/projects.php">Projects</a></li>
                                 <li class="lib-itm"><a href="/src/bonsai.php">Bonsai</a></li>
-                                <li class="lib-itm"><a href="/src/misc.php">Misc</a></li>
                         </ul>
-                        <form class="search">
-                                <input type="text" placeholder="Search">
-                                <button ><p>Go</p></button>
-                        </form>
+                        <ul id="left_library"class="library-left" style="margin-left: auto;">
+                                <li class="lib-itm"><a href="https://github.com/dovskyi" target="_blank" style="background:var(--gray-light);">Github</a></li>
+                        </ul>
                         </div>
                 </div>
         </nav>
+        </div>
 </header>
